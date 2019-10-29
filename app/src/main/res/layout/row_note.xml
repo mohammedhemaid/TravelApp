@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.mohammedhemaid.travelapp.view.RowNote_ xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/_16sdp"
+    app:cardUseCompatPadding="true"
+    android:id="@+id/row_note"
+    app:cardCornerRadius="@dimen/_8sdp">
+
+
+    <TextView
+        android:id="@+id/mNoteTile_tv"
+        android:padding="@dimen/_16sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name" />
+
+</com.mohammedhemaid.travelapp.view.RowNote_>
