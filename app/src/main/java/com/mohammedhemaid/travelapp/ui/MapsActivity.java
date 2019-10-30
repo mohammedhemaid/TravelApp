@@ -6,11 +6,9 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -26,13 +24,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.mohammedhemaid.travelapp.R;
+import com.mohammedhemaid.travelapp.util.PermissionUtil;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
-
-import static com.mohammedhemaid.travelapp.ui.AddNoteActivity.ADD_LOCATION;
 
 @EActivity(R.layout.activity_maps)
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -105,24 +102,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     private void getLocationPermission() {
-        if (!hasPermissions(this, permissions)) {
+        if (!PermissionUtil.hasPermissions(this, permissions)) {
             ActivityCompat.requestPermissions(this, permissions, LOCATION_PERMISSION_REQUEST_CODE);
         } else {
             mLocationPermissionsGranted = true;
 
             initMap();
         }
-    }
-
-    public static boolean hasPermissions(Context context, String... permissions) {
-        if (context != null && permissions != null) {
-            for (String permission : permissions) {
-                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 
 

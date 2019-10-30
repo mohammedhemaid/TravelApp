@@ -1,7 +1,9 @@
 package com.mohammedhemaid.travelapp.ui;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -13,7 +15,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.mohammedhemaid.travelapp.R;
+import com.mohammedhemaid.travelapp.common.PhotoTakerManager;
 import com.mohammedhemaid.travelapp.model.Note;
+import com.mohammedhemaid.travelapp.util.PermissionUtil;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -25,12 +29,14 @@ import org.androidannotations.annotations.ViewById;
 import static com.mohammedhemaid.travelapp.ui.MainActivity.NOTE_EXTRAS;
 
 @EActivity(R.layout.activity_add_note)
-public class AddNoteActivity extends AppCompatActivity {
+public class AddNoteActivity extends AppCompatActivity implements PhotoTakerManager.Listener {
 
     private static final String TAG = "AddNoteActivity";
     public static final String EXTRA_ID = "com.mohammedhemaid.travelapp.ui.EXTRA_ID";
-
+    private static final int CAMERA_CODE = 2;
     public static final int ADD_LOCATION = 145;
+    private PhotoTakerManager photoTakerManager;
+
 
     @Extra
     Note noteIntent;
@@ -57,6 +63,7 @@ public class AddNoteActivity extends AppCompatActivity {
     @AfterViews
     public void after() {
 
+        photoTakerManager = new PhotoTakerManager(this);
 
         if (noteIntent != null) {
 
@@ -78,6 +85,25 @@ public class AddNoteActivity extends AppCompatActivity {
                 .mLatLng(String.valueOf(mLocationTextInputEditText.getText()))
                 .startForResult(ADD_LOCATION);
 
+    }
+
+    @Click(R.id.mCamera_imageButton)
+    public void takePicture() {
+        maybeStartCameraPage();
+
+    }
+
+    private void maybeStartCameraPage() {
+        if (PermissionUtil.hasPermissions(this, Manifest.permission.CAMERA)) {
+            Intent takePhotoIntent = photoTakerManager.getPhotoTakingIntent(this);
+            if (takePhotoIntent == null) {
+                Toast.makeText(this, "failed", Toast.LENGTH_SHORT).show();
+            } else {
+                startActivityForResult(takePhotoIntent, CAMERA_CODE);
+            }
+        } else {
+            PermissionUtil.requestPermission(this, Manifest.permission.CAMERA, CAMERA_CODE);
+        }
     }
 
 
@@ -119,4 +145,13 @@ public class AddNoteActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onTakePhotoFailure() {
+
+    }
+
+    @Override
+    public void onTakePhotoSuccess(Bitmap bitmap) {
+
+    }
 }
