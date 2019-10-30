@@ -6,4 +6,14 @@
     <string name="description">Description</string>
     <string name="title_activity_maps">Map</string>
     <string name="save">Save</string>
+    <string name="processing_image">Processing image&#8230;</string>
+    <string name="take_photo_with_camera_failed">
+        Sorry, we are unable to process your device\'s camera photos.
+    </string>
+    <string name="please_insert_a_title">Please insert a Title</string>
+    <string name="no_image_attached">No Image attached</string>
+    <string name="photo">Photo</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="some_thing_wrong_happend">Some thing Wrong Happend</string>
 </resources>

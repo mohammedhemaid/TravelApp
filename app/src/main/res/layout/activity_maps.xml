@@ -14,24 +14,12 @@
         android:layout_height="match_parent"
         tools:context=".ui.MapsActivity" />
 
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/mCurrentLocation_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/mDone_fab"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="@dimen/_16sdp"
-        android:layout_marginEnd="@dimen/_16sdp"
-        android:src="@drawable/ic_gps" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/mDone_fab"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/mSave_button"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="@dimen/_16sdp"
-        android:layout_marginEnd="@dimen/_16sdp"
+        style="@style/button"
+        android:text="@string/save"
         android:src="@drawable/ic_done" />
 </RelativeLayout>

@@ -78,8 +78,8 @@ public class NoteRepository {
 
         @Override
         protected Void doInBackground(Note... notes) {
-
-            noteDao.update(notes[0]);
+            Note note = notes[0];
+            noteDao.update(note.getTitle(),note.getLocation(),note.getTime(),note.getDescription());
             return null;
         }
     }

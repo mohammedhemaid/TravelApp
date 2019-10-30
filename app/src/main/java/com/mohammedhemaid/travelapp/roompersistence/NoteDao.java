@@ -17,8 +17,11 @@ public interface NoteDao {
     @Insert
     void insert(Note note);
 
-    @Update
-    void update(Note note);
+    @Query("UPDATE note_table SET title=:title ,location=:location,time=:time , description =:description")
+    void update(String title,
+                String location,
+                String time,
+                String description);
 
     @Delete
     void delete(Note note);

@@ -12,14 +12,15 @@ import android.provider.MediaStore;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
-
 import com.mohammedhemaid.travelapp.util.FileUtil;
 import com.mohammedhemaid.travelapp.util.ImageUtil;
+
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+/** Utility class to take photos via a camera intent and do the necessary post-processing */
 public class PhotoTakerManager {
 
     public interface Listener {

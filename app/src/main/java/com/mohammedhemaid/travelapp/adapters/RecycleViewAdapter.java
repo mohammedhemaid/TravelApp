@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mohammedhemaid.travelapp.view.RowNote;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,13 +19,13 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private static final String TAG = "RecycleViewAdapter";
     private Context mContext;
     private List<?> mData = new ArrayList();
-
-    public RecycleViewAdapter(Context mContext) {
-        this.mContext = mContext;
-    }
-
     private int recycleViewRes;
+    private Listener listener;
 
+    public RecycleViewAdapter(Context mContext, Listener listener) {
+        this.mContext = mContext;
+        this.listener = listener;
+    }
 
     @NonNull
     @Override
@@ -41,8 +43,8 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Log.d(TAG, "onBindViewHolder: outside " + position);
 
-        if (holder instanceof  ViewHolder){
-            ((ViewHolder) holder).bind(mData.get(position),position);
+        if (holder instanceof ViewHolder) {
+            ((ViewHolder) holder).bind(listener, mData.get(position), position);
             Log.d(TAG, "onBindViewHolder: " + position);
         }
     }
@@ -50,7 +52,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public int getItemCount() {
         Log.d(TAG, "getItemCount: " + mData.size());
-        return mData.size() ;
+        return mData.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -65,11 +67,11 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         }
 
-        private void bind(Object o, int position) {
+        private void bind(Listener listener, Object o, int position) {
 
             if (customView instanceof IBind) {
 
-                ((IBind) customView).bind(o, position);
+                ((IBind) customView).bind(listener, o, position);
             }
         }
 
@@ -86,6 +88,16 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     public interface IBind {
-        void bind(Object o, int position);
+        void bind(Listener listener, Object o, int position);
+    }
+
+
+    public interface Listener {
+
+        void onEditClick(Object o);
+
+        void onDeleteClick(Object o);
+
+        void onError();
     }
 }

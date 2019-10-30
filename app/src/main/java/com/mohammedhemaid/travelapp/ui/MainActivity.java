@@ -1,21 +1,19 @@
 package com.mohammedhemaid.travelapp.ui;
 
-import androidx.annotation.Nullable;
+import android.app.Activity;
+import android.content.Intent;
+import android.util.Log;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
-
 import com.mohammedhemaid.travelapp.R;
 import com.mohammedhemaid.travelapp.adapters.RecycleViewAdapter;
 import com.mohammedhemaid.travelapp.model.Note;
+import com.mohammedhemaid.travelapp.util.UIUtil;
 import com.mohammedhemaid.travelapp.viewmodel.NoteViewModel;
 
 import org.androidannotations.annotations.AfterViews;
@@ -23,14 +21,13 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OnActivityResult;
 import org.androidannotations.annotations.ViewById;
-import org.w3c.dom.Node;
 
 import java.util.List;
 
 import static com.mohammedhemaid.travelapp.ui.AddNoteActivity.EXTRA_ID;
 
 @EActivity(R.layout.activity_main)
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements RecycleViewAdapter.Listener {
 
     private static final String TAG = "MainActivity";
 
@@ -47,13 +44,12 @@ public class MainActivity extends AppCompatActivity {
     public void after() {
 
         initRecycleView();
-
         showData();
     }
 
     private void initRecycleView() {
 
-        mAdapter = new RecycleViewAdapter(this);
+        mAdapter = new RecycleViewAdapter(this, this);
         mAdapter.setRecycleViewRes(R.layout.row_note);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setHasFixedSize(true);
@@ -62,12 +58,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void onItemClick(Note note){
-        AddNoteActivity_
-                .intent(this)
-                .noteIntent(note)
-                .noteId(note.getId())
-                .startForResult(EDIT_NOTE_REQUEST);
+    public void onItemClick(Note note) {
+
     }
 
     private void showData() {
@@ -86,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     @OnActivityResult(ADD_NOTE_REQUEST)
-    public void addNoteOnResult(int resultCode,@OnActivityResult.Extra Note note){
+    public void addNoteOnResult(int resultCode, @OnActivityResult.Extra Note note) {
 
         if (resultCode == Activity.RESULT_OK) {
             Log.d(TAG, "addNoteOnResult: " + note);
@@ -95,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @OnActivityResult(EDIT_NOTE_REQUEST)
-    public void editNoteOnResult(int resultCode,Intent data){
+    public void editNoteOnResult(int resultCode, Intent data) {
 
         if (resultCode == Activity.RESULT_OK) {
             Note note = data.getParcelableExtra(NOTE_EXTRAS);
@@ -112,4 +104,25 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onEditClick(Object o) {
+        Note note = (Note) o;
+        AddNoteActivity_
+                .intent(this)
+                .noteIntent(note)
+                .noteId(note.getId())
+                .startForResult(EDIT_NOTE_REQUEST);
+    }
+
+    @Override
+    public void onDeleteClick(Object o) {
+        mNoteViewModel.delete((Note) o);
+
+    }
+
+    @Override
+    public void onError() {
+
+        UIUtil.showLongToast(getString(R.string.some_thing_wrong_happend), this);
+    }
 }

@@ -2,11 +2,8 @@ package com.mohammedhemaid.travelapp.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
-import com.google.android.gms.maps.model.LatLng;
 
 @Entity(tableName = "note_table")
 public class Note implements Parcelable {
@@ -19,7 +16,7 @@ public class Note implements Parcelable {
    private String time;
    private String description;
 
-    public Note(String image, String title, String location, String time, String description) {
+    public Note( String image, String title, String location, String time, String description) {
         this.image = image;
         this.title = title;
         this.location = location;

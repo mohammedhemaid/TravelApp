@@ -56,21 +56,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         getLocationPermission();
     }
 
-
-    @Click(R.id.mCurrentLocation_fab)
-    public void currentLocationFab() {
-        getDeviceLocation();
-    }
-
-
-    @Click(R.id.mDone_fab)
-    public void mDoneFab() {
+    @Click(R.id.mSave_button)
+    public void saveLocation() {
         Intent resultIntent = new Intent();
         resultIntent.putExtra("mLatLngText", mLatLng);
 
         setResult(Activity.RESULT_OK, resultIntent);
 
-        Log.d(TAG, "mDoneFab: " + mLatLng);
         finish();
 
     }

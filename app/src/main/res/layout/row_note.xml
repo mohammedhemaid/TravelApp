@@ -1,20 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.mohammedhemaid.travelapp.view.RowNote_ xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/row_note"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/_16sdp"
-    app:cardUseCompatPadding="true"
-    android:id="@+id/row_note"
-    app:cardCornerRadius="@dimen/_8sdp">
+    app:cardCornerRadius="@dimen/_8sdp"
+    app:cardUseCompatPadding="true">
 
+    <LinearLayout
+        android:padding="@dimen/_8sdp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/mNoteTile_tv"
-        android:padding="@dimen/_16sdp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/app_name" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+            <TextView
+                android:id="@+id/mNoteTile_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="@dimen/_16ssp"
+                android:textColor="@android:color/black"
+                android:text="@string/app_name" />
+
+            <TextView
+                android:id="@+id/mNoteTime_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/mNoteTile_tv"
+                android:text="@string/time" />
+
+            <ImageButton
+                android:id="@+id/context_menu_imb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_more"
+                android:background="@android:color/transparent"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/row_note_image_sdv"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_300sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            fresco:roundedCornerRadius="8dp"
+            />
+
+    </LinearLayout>
 </com.mohammedhemaid.travelapp.view.RowNote_>
