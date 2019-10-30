@@ -8,7 +8,7 @@ import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
 
-import com.randomappsinc.travelbuddy.common.Constants;
+import com.mohammedhemaid.travelapp.common.Constants;
 
 import java.io.File;
 import java.io.IOException;

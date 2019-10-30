@@ -9,7 +9,6 @@ import android.media.ExifInterface;
 import android.net.Uri;
 
 import androidx.annotation.Nullable;
-import androidx.exifinterface.media.ExifInterface;
 
 import java.io.File;
 import java.io.FileOutputStream;

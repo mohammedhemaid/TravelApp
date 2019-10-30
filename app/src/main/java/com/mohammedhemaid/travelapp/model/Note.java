@@ -12,12 +12,12 @@ import com.google.android.gms.maps.model.LatLng;
 public class Note implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)
-    int id;
-    String image;
-    String title;
-    String location;
-    String time;
-    String description;
+   private int id;
+   private String image;
+   private String title;
+   private String location;
+   private String time;
+   private String description;
 
     public Note(String image, String title, String location, String time, String description) {
         this.image = image;
