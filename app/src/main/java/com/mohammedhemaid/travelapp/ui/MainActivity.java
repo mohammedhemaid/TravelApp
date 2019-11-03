@@ -37,8 +37,7 @@ public class MainActivity extends AppCompatActivity implements RecycleViewAdapte
 
     RecycleViewAdapter mAdapter;
     NoteViewModel mNoteViewModel;
-    @ViewById(R.id.mNote_rv)
-    RecyclerView mRecyclerView;
+    @ViewById(R.id.mNote_rv) RecyclerView mRecyclerView;
 
     @AfterViews
     public void after() {
@@ -51,14 +50,9 @@ public class MainActivity extends AppCompatActivity implements RecycleViewAdapte
 
         mAdapter = new RecycleViewAdapter(this, this);
         mAdapter.setRecycleViewRes(R.layout.row_note);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(mAdapter);
 
-
-    }
-
-    public void onItemClick(Note note) {
 
     }
 
