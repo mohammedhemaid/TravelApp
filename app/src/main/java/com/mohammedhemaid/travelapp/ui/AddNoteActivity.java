@@ -5,20 +5,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.mohammedhemaid.travelapp.R;
@@ -47,35 +41,21 @@ public class AddNoteActivity extends AppCompatActivity implements PhotoTakerMana
     private MaterialDialog progressDialog;
 
 
-    @Extra
-    Note noteIntent;
+    @Extra Note noteIntent;
+    @Extra int noteId;
 
-    @Extra
-    int noteId;
-
-    @ViewById(R.id.title_til)
-    TextInputLayout mTitleTextInputLayout;
-
-    @ViewById(R.id.title_ted)
-    TextInputEditText mTitleTextInputEditText;
-
-    @ViewById(R.id.location_ted)
-    TextInputEditText mLocationTextInputEditText;
-
-    @ViewById(R.id.time_ted)
-    TextInputEditText mTimeTextInputEditText;
-
-    @ViewById(R.id.description_ted)
-    TextInputEditText mDescriptionTextInputEditText;
-
-    @ViewById(R.id.mCamera_imageButton)
-    ImageButton mCameraImageButton;
-    @ViewById(R.id.taken_image_sdv)
-    SimpleDraweeView mTakenImageSimpleDraweeView;
+    @ViewById(R.id.title_til) TextInputLayout mTitleTextInputLayout;
+    @ViewById(R.id.title_ted) TextInputEditText mTitleTextInputEditText;
+    @ViewById(R.id.location_ted) TextInputEditText mLocationTextInputEditText;
+    @ViewById(R.id.time_ted) TextInputEditText mTimeTextInputEditText;
+    @ViewById(R.id.description_ted) TextInputEditText mDescriptionTextInputEditText;
+    @ViewById(R.id.mCamera_imageButton) ImageButton mCameraImageButton;
+    @ViewById(R.id.taken_image_sdv) SimpleDraweeView mTakenImageSimpleDraweeView;
 
     @AfterViews
     public void after() {
 
+        //This is test
         photoTakerManager = new PhotoTakerManager(this);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -151,10 +131,10 @@ public class AddNoteActivity extends AppCompatActivity implements PhotoTakerMana
     @Click(R.id.mSave_button)
     public void saveNote() {
 
-        String title = String.valueOf(mTitleTextInputEditText.getText());
-        String description = String.valueOf(mDescriptionTextInputEditText.getText());
-        String latLng = String.valueOf(mLocationTextInputEditText.getText());
-        String time = String.valueOf(mTimeTextInputEditText.getText());
+        String title = String.valueOf(mTitleTextInputEditText.getText()).trim();
+        String description = String.valueOf(mDescriptionTextInputEditText.getText()).trim();
+        String latLng = String.valueOf(mLocationTextInputEditText.getText()).trim();
+        String time = String.valueOf(mTimeTextInputEditText.getText()).trim();
 
         if (title.trim().isEmpty()) {
             mTitleTextInputLayout.setError(getString(R.string.please_insert_a_title));
